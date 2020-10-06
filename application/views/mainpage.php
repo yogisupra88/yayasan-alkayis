@@ -138,10 +138,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link ">
+                            <a href="<?= base_url('mydashboard/laporan_keuangan') ?>"
+                                class="nav-link <?= $aktive = ($crumb == 'Laporan Keuangan') ? 'active' : ''; ?> ">
                                 <i class="nav-icon fa fa-list-alt"></i>
                                 <p>
                                     Laporan Keuangan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a data-toggle="modal" data-target="#reset" class="nav-link ">
+                                <i class="nav-icon fa fa-times"></i>
+                                <p>
+                                    Reset data
                                 </p>
                             </a>
                         </li>
@@ -245,7 +254,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Created &copy; <?= date("Y"); ?> <a href="http://adminlte.io">Hamzahbersaudara.com</a>.</strong>
+            <strong>Created &copy; <?= date("Y"); ?> <a href="">Hamzahbersaudara.com</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.0.5
@@ -259,6 +268,37 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+    <!-- Modal Reset data -->
+    <div class="modal fade" id="reset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title" id="exampleModalLabel">Reset Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url('transaksi/reseting') ?>" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <h5>Perhatian !</h5>
+                            <p>Reset Data , Akan menghapus seluruh Data transaksi KAS. jika anda yakin silahkan
+                                Konfirmasi
+                                Password</p>
+                            <label for="">Konfirmasi Password Anda</label>
+                            <input type="password" class="form-control" name="password" id="" aria-describedby="helpId"
+                                placeholder="" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                        <button type="submit" class="btn btn-warning">Hapus Sekarang</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script>
     $.widget.bridge('uibutton', $.ui.button)
@@ -269,9 +309,6 @@
     <script src="<?= base_url('dashboard/') ?>plugins/chart.js/Chart.min.js"></script>
     <!-- Sparkline -->
     <script src="<?= base_url('dashboard/') ?>plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="<?= base_url('dashboard/') ?>plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="<?= base_url('dashboard/') ?>plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
     <!-- jQuery Knob Chart -->
     <script src="<?= base_url('dashboard/') ?>plugins/jquery-knob/jquery.knob.min.js"></script>
     <!-- daterangepicker -->
@@ -293,13 +330,14 @@
     <script src="<?= base_url('dashboard'); ?>/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="<?= base_url('dashboard/') ?>dist/js/pages/dashboard.js"></script>
     <script src="<?= base_url('assets/') ?>digit_nominal.js"></script>
     <script src="<?= base_url('assets/') ?>table.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?= base_url('dashboard/') ?>dist/js/demo.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>assets/webcam/js/qrcodelib.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>assets/webcam/js/webcodecamjquery.js"></script>
+    <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/jquery.js"></script>
+    <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/qrcodelib.js"></script>
+    <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/webcodecamjquery.js"></script>
+    <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/DecoderWorker.js"></script>
     <script type="text/javascript">
     var arg = {
         resultFunction: function(result) {

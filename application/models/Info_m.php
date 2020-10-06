@@ -71,6 +71,42 @@ class Info_m extends CI_Model
         $kredit = $row2['total'];
         return $saldo = $debet - $kredit;
     }
+
+
+    public function post_income($kode, $fromdate, $enddate)
+    {
+        $date = date("Y-m-d");
+        $query1 = "SELECT SUM(debet) AS total 
+        FROM kas  WHERE post_kode = $kode
+        AND tanggal >= '$fromdate' AND tanggal<= '$enddate'";
+        $row1 = $this->db->query($query1)->row_array();
+        return $total = $row1['total'];
+    }
+    public function post_pengeluaran($kode, $fromdate, $enddate)
+    {
+        $date = date("Y-m-d");
+        $query1 = "SELECT SUM(kredit) AS total 
+        FROM kas  WHERE post_kode = $kode
+        AND tanggal >= '$fromdate' AND tanggal<= '$enddate'";
+        $row1 = $this->db->query($query1)->row_array();
+        return $total = $row1['total'];
+    }
+    public function saldo_kas_last($fromdate)
+    {
+        //debet
+        $query1 = "SELECT SUM(debet) AS debet 
+        FROM kas WHERE tanggal < '$fromdate'";
+        $row1 = $this->db->query($query1)->row_array();
+        $debet = $row1['debet'];
+        //kredit
+        $query2 = "SELECT SUM(kredit) AS kredit 
+        FROM kas WHERE tanggal < '$fromdate'";
+        $row2 = $this->db->query($query2)->row_array();
+        $kredit = $row2['kredit'];
+        // saldo
+        return $result = $debet - $kredit;
+    }
+
 }
 
 /* End of file Info_m.php */

@@ -52,6 +52,14 @@
 
             <!-- /.col -->
         </div>
+        <div class="row">
+            <div class="col-12 col-md-8 mt-2">
+                <?php
+                echo $this->session->flashdata('pesan');
+                ?>
+            </div>
+
+        </div>
         <!-- /.row -->
         <div class="row">
             <div class="col-12 mt-2">

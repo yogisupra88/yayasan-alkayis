@@ -108,7 +108,7 @@ class Mydashboard extends CI_Controller
             $data['title'] = 'Yayasan Al kayis || Users';
             $data['crumb'] = 'User';
             $data['total_petugas'] = $this->info_m->total_petugas();
-            $data['total_admin'] = $this->info_m->total_petugas();
+            $data['total_admin'] = $this->info_m->total_admin();
             $data['user'] = $this->crud_m->lihat_data('user');
             $this->template->load('mainpage', 'data_user', $data);
         } else {
@@ -121,6 +121,207 @@ class Mydashboard extends CI_Controller
             redirect('auth');
         }
     }
+    public function ubah_user($id)
+    {
+        $sesi_username = $this->session->userdata('username');
+        $sesi_nama = $this->session->userdata('nama');
+        $jabatan = $this->session->userdata('jabatan');
+        $id = decrypt_url($id);
+
+        if (isset($sesi_username)) {
+            $data['username'] = $sesi_username;
+            $data['nama'] = $sesi_nama;
+            $data['jabatan'] = $jabatan;
+            $data['title'] = 'Yayasan Al kayis || Users';
+            $data['crumb'] = 'Edit User';
+            $data['user'] = $this->crud_m->get_row(['id_user' => $id], 'user');
+            $this->template->load('mainpage', 'form_edit_user', $data);
+        } else {
+            $this->session->set_flashdata('pesan', '
+            <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h6><i class="icon fas fa-exclamation-triangle"></i> Silahkan Login Dahulu..!</h6>
+            </div>
+            ');
+            redirect('auth');
+        }
+    }
+    public function update_user()
+    {
+        $sesi_username = $this->session->userdata('username');
+        $sesi_nama = $this->session->userdata('nama');
+        $jabatan = $this->session->userdata('jabatan');
+
+        if (isset($sesi_username)) {
+            $id_user = $this->input->post('id_user');
+            $username = $this->input->post('username');
+            $nama = htmlspecialchars($this->input->post('nama'));
+            $no_hp = htmlspecialchars($this->input->post('no_hp'));
+            $jabatan = htmlspecialchars($this->input->post('jabatan'));
+            $password = htmlspecialchars($this->input->post('password'));
+            $pass_sha = sha1($password);
+            $update = [
+                'pass_sha' => $pass_sha,
+                'password' => $password,
+                'nama' => $nama,
+                'no_hp' => $no_hp,
+                'jabatan' => $jabatan,
+                'status' => 1,
+            ];
+            $this->crud_m->update_data(['id_user' => $id_user], $update, 'user');
+
+            $this->session->set_flashdata('pesan', '
+            <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h6><i class="icon fa fa-check"></i> Data User : ' . $username . ' telah di update</h6>
+            </div>
+            ');
+            redirect('mydashboard/data_user');
+        } else {
+            $this->session->set_flashdata('pesan', '
+            <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h6><i class="icon fa fa-exclamation-triangle"></i> Silahkan Login Dahulu..!</h6>
+            </div>
+            ');
+            redirect('auth');
+        }
+    }
+    public function delete_user($id, $username)
+    {
+        $sesi_username = $this->session->userdata('username');
+        $sesi_nama = $this->session->userdata('nama');
+        $jabatan = $this->session->userdata('jabatan');
+
+        if (isset($sesi_username)) {
+            $id_user = decrypt_url($id);
+            $username = decrypt_url($username);
+            $this->crud_m->hapus_data(['id_user' => $id_user], 'user');
+
+            $this->session->set_flashdata('pesan', '
+            <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h6><i class="icon fa fa-check"></i> Data User : ' . $username . ' telah di Hapus</h6>
+            </div>
+            ');
+            redirect('mydashboard/data_user');
+        } else {
+            $this->session->set_flashdata('pesan', '
+            <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h6><i class="icon fa fa-exclamation-triangle"></i> Silahkan Login Dahulu..!</h6>
+            </div>
+            ');
+            redirect('auth');
+        }
+    }
+    public function laporan_keuangan()
+    {
+        $sesi_username = $this->session->userdata('username');
+        $sesi_nama = $this->session->userdata('nama');
+        $jabatan = $this->session->userdata('jabatan');
+
+        if (isset($sesi_username)) {
+            $data['username'] = $sesi_username;
+            $data['nama'] = $sesi_nama;
+            $data['jabatan'] = $jabatan;
+            $data['title'] = 'Yayasan Al kayis || Laporan Keuangan';
+            $data['crumb'] = 'Laporan Keuangan';
+            // cek operan Tanggal dari form
+            if ($this->input->post('fromdate')) {
+                $from = $this->input->post('fromdate');
+                $end = $this->input->post('enddate');
+            } else {
+                $from = Date('Y-m-01');
+                $end = Date('Y-m-d');
+            }
+            $data['periode'] = date("d M Y", strtotime($from)) . ' s/d ' . date("d M Y", strtotime($end));
+            $data['from_tgl'] =  $from;
+            $data['end_tgl'] =  $end;
+            // filtering data
+            // Last Saldo
+            $data['saldo_last'] = $this->info_m->saldo_kas_last($from);
+
+            // pendapatan
+            $data['kotak_amal'] = $this->info_m->post_income(1, $from, $end);
+            $data['infaq'] = $this->info_m->post_income(2, $from, $end);
+            $data['zakat'] = $this->info_m->post_income(3, $from, $end);
+            $data['sumbangan'] = $this->info_m->post_income(4, $from, $end);
+            $data['debet'] = $data['saldo_last'] + $data['kotak_amal'] + $data['infaq'] + $data['zakat'] + $data['sumbangan'];
+            // pengeluaran
+            $data['operasional'] = $this->info_m->post_pengeluaran(5, $from, $end);
+            $data['listrik'] = $this->info_m->post_pengeluaran(6, $from, $end);
+            $data['pemeliharaan'] = $this->info_m->post_pengeluaran(7, $from, $end);
+            $data['peralatan'] = $this->info_m->post_pengeluaran(8, $from, $end);
+            $data['lain'] = $this->info_m->post_pengeluaran(9, $from, $end);
+            $data['kredit'] = $data['operasional'] + $data['listrik'] + $data['pemeliharaan'] + $data['peralatan'] + $data['lain'];
+            // saldo Akhir
+            $data['saldo_akhir'] = $data['debet'] - $data['kredit'];
+            $this->template->load('mainpage', 'laporan', $data);
+        } else {
+            $this->session->set_flashdata('pesan', '
+            <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h6><i class="icon fa fa-exclamation-triangle"></i> Silahkan Login Dahulu..!</h6>
+            </div>
+            ');
+            redirect('auth');
+        }
+    }
+
+    public function print_laporan($from, $end)
+    {
+        $sesi_username = $this->session->userdata('username');
+        $sesi_nama = $this->session->userdata('nama');
+        $jabatan = $this->session->userdata('jabatan');
+
+        if (isset($sesi_username)) {
+            $data['username'] = $sesi_username;
+            $data['nama'] = $sesi_nama;
+            $data['jabatan'] = $jabatan;
+            $data['title'] = 'Yayasan Al kayis || Laporan Keuangan';
+            $data['crumb'] = 'Laporan Keuangan';
+            // cek operan Tanggal dari form
+            if ($this->input->post('fromdate')) {
+                $from = $this->input->post('fromdate');
+                $end = $this->input->post('enddate');
+            } else {
+                $from = Date('Y-m-01');
+                $end = Date('Y-m-d');
+            }
+            $data['periode'] = date("d M Y", strtotime($from)) . ' s/d ' . date("d M Y", strtotime($end));
+            // filtering data
+            // Last Saldo
+            $data['saldo_last'] = $this->info_m->saldo_kas_last($from);
+            // pendapatan
+            $data['kotak_amal'] = $this->info_m->post_income(1, $from, $end);
+            $data['infaq'] = $this->info_m->post_income(2, $from, $end);
+            $data['zakat'] = $this->info_m->post_income(3, $from, $end);
+            $data['sumbangan'] = $this->info_m->post_income(4, $from, $end);
+            $data['debet'] = $data['saldo_last'] + $data['kotak_amal'] + $data['infaq'] + $data['zakat'] + $data['sumbangan'];
+            // pengeluaran
+            $data['operasional'] = $this->info_m->post_pengeluaran(5, $from, $end);
+            $data['listrik'] = $this->info_m->post_pengeluaran(6, $from, $end);
+            $data['pemeliharaan'] = $this->info_m->post_pengeluaran(7, $from, $end);
+            $data['peralatan'] = $this->info_m->post_pengeluaran(8, $from, $end);
+            $data['lain'] = $this->info_m->post_pengeluaran(9, $from, $end);
+            $data['kredit'] = $data['operasional'] + $data['listrik'] + $data['pemeliharaan'] + $data['peralatan'] + $data['lain'];
+            // saldo Akhir
+            $data['saldo_akhir'] = $data['debet'] - $data['kredit'];
+            $this->load->view('print_laporan', $data);
+        } else {
+            $this->session->set_flashdata('pesan', '
+            <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h6><i class="icon fa fa-exclamation-triangle"></i> Silahkan Login Dahulu..!</h6>
+            </div>
+            ');
+            redirect('auth');
+        }
+    }
+
+
+
 
 
 
@@ -350,6 +551,60 @@ class Mydashboard extends CI_Controller
             redirect('auth');
         }
     }
+    public function tambah_user()
+    {
+        $sesi_username = $this->session->userdata('username');
+        $sesi_nama = $this->session->userdata('nama');
+        $jabatan = $this->session->userdata('jabatan');
+
+        if (isset($sesi_username)) {
+
+            $nama = htmlspecialchars($this->input->post('nama'));
+            $no_hp = htmlspecialchars($this->input->post('no_hp'));
+            $jabatan = htmlspecialchars($this->input->post('jabatan'));
+            $username = htmlspecialchars($this->input->post('username'));
+            $password = htmlspecialchars($this->input->post('password'));
+            $pass_sha = sha1($password);
+            $user = $this->crud_m->get_row(['username' => $username], 'user');
+            if ($user) {
+                $this->session->set_flashdata('pesan', '
+                <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h6><i class="icon fa fa-times"></i>Gagal !. Username : ' . $username . ' Sudah digunakan, ganti username baru </h6>
+                </div>
+                ');
+                redirect('mydashboard/data_user');
+            } else {
+                $input = [
+                    'username' => $username,
+                    'pass_sha' => $pass_sha,
+                    'password' => $password,
+                    'nama' => $nama,
+                    'no_hp' => $no_hp,
+                    'jabatan' => $jabatan,
+                    'status' => 1,
+                ];
+                $this->crud_m->input_data($input, 'user');
+
+                $this->session->set_flashdata('pesan', '
+                <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h6><i class="icon fa fa-check"></i>User Baru : ' . $username . ' Berhasil Tambahkan</h6>
+                </div>
+                ');
+                redirect('mydashboard/data_user');
+            }
+        } else {
+            $this->session->set_flashdata('pesan', '
+            <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h6><i class="icon fas fa-exclamation-triangle"></i> Silahkan Login Dahulu..!</h6>
+            </div>
+            ');
+            redirect('auth');
+        }
+    }
+
 }
 
 /* End of file Dashboard.php */

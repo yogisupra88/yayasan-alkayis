@@ -42,9 +42,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4 col-md-offset-4 mx-auto">
-        <div class="panel panel-danger">
-            <div class="text-center">
+    <div class="col-8">
+        <div class="panel panel-danger  text-center">
+            <div>
                 <h8 class="text-danger bold">Arahkan Camera pada QR code</h8> <br>
             </div>
             <div class="panel-body text-center">
@@ -57,7 +57,7 @@
                 </div>
                 <hr>
             </div>
-            <div class="panel-footer text-center">
+            <div class="panel-footer">
                 <select></select>
                 <hr>
                 <a href="<?= base_url('mydashboard/beranda_petugas') ?>" class="btn btn-danger">Cancel</a>

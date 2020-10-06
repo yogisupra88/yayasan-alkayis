@@ -358,6 +358,48 @@ class Transaksi extends CI_Controller
             redirect('auth');
         }
     }
+    public function reseting()
+    {
+        $sesi_username = $this->session->userdata('username');
+        $sesi_nama = $this->session->userdata('nama');
+        $jabatan = $this->session->userdata('jabatan');
+        if (isset($sesi_username) and $jabatan == 'Admin') {
+            $password = htmlspecialchars($this->input->post('password'));
+            $pass_sha = sha1($password);
+            $cek = $this->crud_m->get_row(['pass_sha' => $pass_sha, 'username' => $sesi_username], 'user');
+            if ($cek) {
+                $kas = $this->crud_m->lihat_data('kas');
+                foreach ($kas as $row) {
+                    $id = $row['id'];
+                    $this->crud_m->hapus_data(['id' => $id], 'kas');
+                }
+                $this->session->set_flashdata('pesan', '
+                <div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h6><i class="icon fa fa-check"></i> Seluruh Transaksi KAS Berhasil di Hapus dari Database</h6>
+                </div>
+                ');
+                redirect('mydashboard/beranda_admin');
+            } else {
+                $this->session->set_flashdata('pesan', '
+                <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h6><i class="icon fa fa-check"></i>Gagal Reset, Password Tidak Cocok</h6>
+                </div>
+                ');
+                redirect('mydashboard/beranda_admin');
+            }
+        } else {
+            $this->session->set_flashdata('pesan', '
+            <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h6><i class="icon fa fa-exclamation-triangle"></i> Silahkan Login Dahulu..!</h6>
+            </div>
+            ');
+            redirect('auth');
+        }
+    }
+
 }
 
 /* End of file Controllername.php */
