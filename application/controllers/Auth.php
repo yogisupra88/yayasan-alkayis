@@ -55,22 +55,12 @@ class Auth extends CI_Controller
                     redirect('mydashboard/beranda_petugas');
                 }
             } else {
-                $this->session->set_flashdata('pesan', '
-                <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h6><i class="icon fas fa-exclamation-triangle"></i> Password Salah..!!</h6>
-                </div>
-                ');
+                $this->session->set_flashdata('pesan', 'Salah Isi Password');
                 redirect('auth');
             }
         } else {
 
-            $this->session->set_flashdata('pesan', '
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h6><i class="icon fas fa-exclamation-triangle"></i> Username Salah..!!</h6>
-            </div>
-            ');
+            $this->session->set_flashdata('pesan', 'Username Tidak Ada');
             redirect('auth');
         }
     }
@@ -80,10 +70,7 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('username');
         $this->session->unset_userdata('nama');
         $this->session->unset_userdata('jabatan');
-        $this->session->set_flashdata('pesan', '
-        <div class="alert alert-success" role="alert">
-           Anda sudah Logout
-        </div> ');
+        $this->session->set_flashdata('pesan', 'Anda Sudah logout');
         redirect('auth');
     }
 }
