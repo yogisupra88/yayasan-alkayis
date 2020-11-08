@@ -68,8 +68,8 @@
                         <td><?= date("d M Y", strtotime($row['tanggal'])); ?></td>
                         <td><?= $row['kode_trx']; ?></td>
                         <td><?= $row['post']; ?></td>
-                        <td><?= number_format($row['debet'], 0, ",", "."); ?></td>
-                        <td><?= number_format($row['kredit'], 0, ",", "."); ?></td>
+                        <td>Rp.<?= number_format($row['debet'], 0, ",", "."); ?></td>
+                        <td>Rp.<?= number_format($row['kredit'], 0, ",", "."); ?></td>
                         <td>
                             <a href="<?= base_url('mydashboard/edit_form_kas/') ?><?= encrypt_url($row['id']); ?>"
                                 class="btn btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i></a>

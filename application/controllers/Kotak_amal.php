@@ -16,12 +16,16 @@ class Kotak_amal extends CI_Controller
     {
         if (isset($this->sesi_username)) {
             $nama = htmlspecialchars($this->input->post('donatur'));
+            $tipe = htmlspecialchars($this->input->post('tipe'));
             $alamat = htmlspecialchars($this->input->post('alamat'));
+            $kontak = htmlspecialchars($this->input->post('kontak'));
             $time = time();
             $input = [
                 'time' => $time,
                 'nama_donatur' => $nama,
+                'tipe' => $tipe,
                 'alamat' => $alamat,
+                'kontak' => $kontak,
             ];
             $this->crud_m->input_data($input, 'kotak');
             $kotak = $this->crud_m->get_row(['time' => $time], 'kotak');
@@ -58,9 +62,11 @@ class Kotak_amal extends CI_Controller
             $id_kotak = $this->input->post('id_kotak');
             $donatur = htmlspecialchars($this->input->post('donatur'));
             $alamat = htmlspecialchars($this->input->post('alamat'));
+            $tipe = $this->input->post('tipe');
             $input = [
                 'nama_donatur' => $donatur,
-                'alamat' => $alamat
+                'alamat' => $alamat,
+                'tipe' => $tipe
             ];
             $this->crud_m->update_data(['id_kotak' => $id_kotak], $input, 'kotak');
             $this->session->set_flashdata('pesan', '

@@ -21,20 +21,20 @@
 </div>
 <div class="row">
     <div class="col-12">
+        <button class="btn btn-success" data-toggle="modal" data-target="#newkotak"><i class="fa fa-plus"
+                aria-hidden="true"> </i> Tambah Kotak Amal</button>
+        <a href="<?= base_url('kotak/print_all') ?>" class="btn btn-warning btn-sm float-right" target="_blank"><i
+                class="fa fa-print mr-2"></i>
+            print_all</a>
         <div class="card-body">
-            <button class="btn btn-info" data-toggle="modal" data-target="#newkotak"><i class="fa fa-plus"
-                    aria-hidden="true"> </i> Tambah Kotak Amal</button>
-            <a href="<?= base_url('kotak/print_all') ?>" class="btn btn-warning btn-sm float-right" target="_blank"><i
-                    class="fa fa-print mr-2"></i>
-                print_all</a>
-
-            <table id="example2" class="table table-bordered ">
-
+            <table id="example1" class="table table-bordered ">
                 <thead>
                     <tr>
                         <th>Kode Kotak</th>
+                        <th>Tipe Kotak</th>
                         <th>Donatur</th>
                         <th>Alamat</th>
+                        <th>Kontak</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -45,32 +45,36 @@
                     ?>
                     <tr>
                         <td>
-                            <?= $row['kode_kotak']; ?><br>
-                            <img class="img-thumbnail" width="80"
-                                src="<?= base_url(); ?>/images/qrcode/<?= $row['foto_qr']; ?>" alt="">
+                            <?= $row['kode_kotak']; ?>
                         </td>
+                        <td><?= $row['tipe']; ?></td>
                         <td><?= $row['nama_donatur']; ?></td>
                         <td><?= $row['alamat']; ?></td>
+                        <td><?= $row['kontak']; ?></td>
                         <td>
                             <a href="<?= base_url('kotak/print_kotak/') ?><?= encrypt_url($row['id_kotak']); ?>"
-                                class=" btn btn-info btn-sm mt-1" target="_blank"><i class="fa fa-print mr-1"
-                                    aria-hidden="true"></i>Print</a>
+                                class=" btn btn-info btn-sm mt-1" target="_blank">
+                                <i class="fa fa-print mr-1" aria-hidden="true"></i>
+                            </a>
                             <button id="edit_kotak" class="btn btn-success btn-sm mt-1" data-toggle="modal"
                                 data-target="#editkotak" data-id="<?= $row['id_kotak'] ?>"
                                 data-kode="<?= $row['kode_kotak'] ?>" data-donatur="<?= $row['nama_donatur'] ?>"
-                                data-alamat="<?= $row['alamat'] ?>">
+                                data-alamat="<?= $row['alamat'] ?>" data-tipe="<?= $row['tipe'] ?>">
                                 <i class="fa fa-pencil mr-1" aria-hidden="true"></i>
-                                Edit
                             </button>
-
                             <a href="<?= base_url('kotak_amal/hapus_kotak/') ?><?= encrypt_url($row['id_kotak']); ?>"
-                                class="btn btn-danger btn-sm mt-1"> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                                class="btn btn-danger btn-sm mt-1"><i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
                         </td>
                     </tr>
                     <?php } ?>
             </table>
         </div>
     </div>
+</div>
+<script>
+$('#data_kotak').DataTable();
+</script>
 
 </div>
 <!-- Modal Tambah Kotak-->
@@ -87,12 +91,26 @@
             <form action="<?= base_url('kotak_amal/add_kotak') ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
+                        <label for="my-select">Jenis Kotak</label>
+                        <select id="my-select" class="custom-select" name="tipe">
+                            <option value="Kaca">Kaca</option>
+                            <option value="Kayu">Kayu</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="">Nama Donatur</label>
                         <input type="text" class="form-control" name="donatur" id="" aria-describedby="helpId" required>
                     </div>
                     <div class="form-group">
                         <label for="my-textarea">Alamat</label>
-                        <textarea id="my-textarea" class="form-control" name="alamat" rows="3" required></textarea>
+                        <textarea id="my-textarea" class="form-control" name="alamat" rows="3"
+                            placeholder="Alamat Donatur" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="my-textarea">No Kontak</label>
+                        <input type="text" class="form-control" name="kontak" placeholder="No HP / Telepon"
+                            aria-describedby="helpId" required>
+
                     </div>
 
                 </div>
@@ -130,8 +148,16 @@
                             aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label for="my-textarea">Text</label>
+                        <label for="my-textarea">Alamat</label>
                         <textarea id="edit_alamat" class="form-control" name="alamat" rows="3" value=""></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="my-select">Jenis Kotak</label>
+                        <select id="my-select" class="custom-select" name="tipe">
+                            <option id="edit_tipe"></option>
+                            <option value="Kaca">Kaca</option>
+                            <option value="kayu">kayu</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -149,10 +175,13 @@ $(document).on('click', '#edit_kotak', function() {
     var kode = $(this).data('kode');
     var donatur = $(this).data('donatur');
     var alamat = $(this).data('alamat');
+    var tipe = $(this).data('tipe');
 
     $('#edit_id').val(id);
     $('#edit_kode2').val(kode);
     $('#edit_donatur').val(donatur);
     $('#edit_alamat').val(alamat);
+    $('#edit_tipe').val(tipe);
+    $('#edit_tipe').html(tipe);
 });
 </script>

@@ -319,12 +319,6 @@ class Mydashboard extends CI_Controller
             redirect('auth');
         }
     }
-
-
-
-
-
-
     public function beranda_petugas()
     {
         $sesi_username = $this->session->userdata('username');
@@ -362,6 +356,7 @@ class Mydashboard extends CI_Controller
             $data['jabatan'] = $jabatan;
             $data['title'] = 'Yayasan Al kayis || Scanning Kotak Amal';
             $data['crumb'] = 'Scanning';
+            // $this->load->view('scaning', $data);
 
             $this->template->load('mainpage', 'scaning', $data);
         } else {
@@ -604,7 +599,6 @@ class Mydashboard extends CI_Controller
             redirect('auth');
         }
     }
-
 }
 
 /* End of file Dashboard.php */

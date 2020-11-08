@@ -39,6 +39,10 @@
     <!-- jQuery UI 1.11.4 -->
     <script src="<?= base_url('dashboard/') ?>plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script src="<?= base_url('dashboard'); ?>/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url('dashboard'); ?>/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?= base_url('dashboard'); ?>/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?= base_url('dashboard'); ?>/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
 </head>
 
@@ -179,20 +183,11 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('mydashboard/scaning_form') ?>"
-                                class="nav-link <?= $aktive = ($crumb == 'Scanning') ? 'active' : ''; ?>">
-                                <i class="nav-icon fa fa-check-square"></i>
-                                <p>
-                                    scanning
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="<?= base_url('kotak/manual_form') ?>"
                                 class="nav-link  <?= $aktive = ($crumb == 'Form Input Dana') ? 'active' : ''; ?> ">
                                 <i class="nav-icon fa fa-book"></i>
                                 <p>
-                                    Input Manual
+                                    Input
                                 </p>
                             </a>
                         </li>
@@ -303,6 +298,7 @@
     <script>
     $.widget.bridge('uibutton', $.ui.button)
     </script>
+
     <!-- Bootstrap 4 -->
     <script src="<?= base_url('dashboard/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS -->
@@ -324,57 +320,12 @@
     <!-- AdminLTE App -->
     <script src="<?= base_url('dashboard/') ?>dist/js/adminlte.js"></script>
     <!-- DataTables -->
-    <script src="<?= base_url('dashboard'); ?>/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="<?= base_url('dashboard'); ?>/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="<?= base_url('dashboard'); ?>/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="<?= base_url('dashboard'); ?>/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?= base_url('assets/') ?>digit_nominal.js"></script>
     <script src="<?= base_url('assets/') ?>table.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?= base_url('dashboard/') ?>dist/js/demo.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/jquery.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/qrcodelib.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/webcodecamjquery.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/DecoderWorker.js"></script>
-    <script type="text/javascript">
-    var arg = {
-        resultFunction: function(result) {
-            //$('.hasilscan').append($('<input name="noijazah" value=' + result.code + ' readonly><input type="submit" value="Cek"/>'));
-            // $.post("../cek.php", { noijazah: result.code} );
-            var redirect = '<?= base_url('kotak/input_dana') ?>';
-            $.redirectPost(redirect, {
-                kode_kotak: result.code
-            });
-        }
-    };
-
-    var decoder = $("canvas").WebCodeCamJQuery(arg).data().plugin_WebCodeCamJQuery;
-    decoder.buildSelectMenu('select', 1)
-    decoder.play();
-    /*  Without visible select menu
-        decoder.buildSelectMenu(document.createElement('select'), 'environment|back').init(arg).play();
-        
-    */
-    $('select').on('change', function() {
-        decoder.stop().play();
-    });
-
-    // jquery extend function
-    $.extend({
-        redirectPost: function(location, args) {
-            var form = '';
-            $.each(args, function(key, value) {
-                form += '<input type="hidden" name="' + key + '" value="' + value + '">';
-            });
-            $('<form action="' + location + '" method="POST">' + form + '</form>').appendTo('body')
-                .submit();
-        }
-    });
-    </script>
-
-
 
 </body>
 

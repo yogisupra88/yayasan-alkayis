@@ -66,16 +66,18 @@ class Transaksi extends CI_Controller
             $tgl = date('Y-m-d');
             $kotak = $this->crud_m->get_row(['kode_kotak' => $kode], 'kotak');
             $nama_donatur = $kotak->nama_donatur;
+            $tipe = $kotak->tipe;
             $input = [
                 'kode_trx' => time(),
                 'tanggal' => $tgl,
                 'post_kode' => 1,
-                'post' => 'Kotak Amal ( No Kotak : ' . $kode . ' )',
+                'post' => 'Kotak ' . $tipe . ' ( No Kotak : ' . $kode . ' )',
                 'debet' => $dana,
                 'donatur' => $nama_donatur,
                 'kode_kotak' => $kode,
                 'username' => $sesi_username,
-                'nama_petugas' => $sesi_nama
+                'nama_petugas' => $sesi_nama,
+                'tipe_kotak' => $kotak->tipe
             ];
             $this->crud_m->input_data($input, 'kas');
             $this->session->set_flashdata('pesan', '
@@ -261,7 +263,7 @@ class Transaksi extends CI_Controller
             if ($transaksi == 'pemasukan') {
                 switch ($post_kategori) {
                     case "1":
-                        $post = 'Terima Infaq ' . $uraian;
+                        $post = 'Kotak Amal ' . $uraian;
                         break;
                     case "2":
                         $post = 'Terima Infaq ' . $uraian;
@@ -399,7 +401,6 @@ class Transaksi extends CI_Controller
             redirect('auth');
         }
     }
-
 }
 
 /* End of file Controllername.php */

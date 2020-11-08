@@ -10,7 +10,8 @@
                             <?php
                             foreach ($kotak as $row) {   ?>
                             <option value="<?= $row['kode_kotak']; ?>"><?= $row['kode_kotak']; ?> |
-                                <?= $row['nama_donatur']; ?></option>
+                                Kotak-<?= $row['tipe']; ?> |<?= $row['nama_donatur']; ?>
+                            </option>
                             <?php } ?>
                         </select>
                     </div>

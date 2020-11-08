@@ -12,10 +12,11 @@
 <div class="row">
     <div class="col-12">
         <div class="card-body">
-            <table id="example2" class="table table-bordered table-hover">
+            <table id="example1" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>kotak</th>
+                        <th>Donatur</th>
                         <th>Jumlah</th>
                         <th>Action</th>
                     </tr>
@@ -26,19 +27,19 @@
 
                     ?>
                     <tr>
-                        <td><?= $row['kode_kotak']; ?></td>
+                        <td><?= $row['kode_kotak']; ?> | Kotak <?= $row['tipe_kotak']; ?></td>
+                        <td><?= $row['donatur']; ?></td>
                         <td>Rp.<?= number_format($row['debet'], 0, ",", "."); ?></td>
                         <td>
                             <a href="" data-toggle="modal" data-target="#modal_edit_data"
                                 data-kode="<?= $row['kode_kotak']; ?>" data-id="<?= $row['id']; ?>"
                                 data-jumlah="<?= $row['debet']; ?>" data-donatur="<?= $row['donatur']; ?>"
-                                id="tombol_ubah" class="btn btn-info btn-sm mt-2"> <i
-                                    class="fa fa-pencil-square-o mr-2"></i>Edit
+                                id="tombol_ubah" class="btn btn-info btn-sm mt-2"><i class="fa fa-pencil-square-o"></i>
                             </a>
                             <a href="<?= base_url('transaksi/hapus_transaksi/') ?><?= encrypt_url($row['id']) ?>"
                                 class="btn btn-danger btn-sm mt-2"
                                 onclick="return confirm('Anda yakin mau menghapus Data ini ?')">
-                                <i class="fa fa-times mr-2"></i>Hapus </a>
+                                <i class="fa fa-times"></i></a>
                         </td>
                     </tr>
                     <?php } ?>

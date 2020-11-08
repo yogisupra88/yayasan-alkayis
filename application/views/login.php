@@ -20,15 +20,18 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body class="hold-transition login-page bg-light">
+<body class="hold-transition login-page bg-white">
     <div class="login-box text-light">
         <div class="login-logo">
-            <a href="#"><b class="text-info">Yayasan Al Kayis</b></a>
+
+            <a href="#">
+                <img src="<?= base_url('images') ?>/foto/alkayis.jpg" alt="">
+            </a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
-            <div class="card-body login-card-body bg-primary">
-                <p class="login-box-msg">Login User</p>
+            <div class="card-body login-card-body bg-danger">
+                <h3 class="login-box-msg">Login User</h3>
                 <!-- Alert -->
                 <?php
                 echo $this->session->flashdata('pesan');
@@ -69,7 +72,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4 mt-3">
-                            <button type="submit" class="btn btn-danger btn-block">Login</button>
+                            <button type="submit" class="btn btn-success btn-block">Login</button>
                         </div>
                         <!-- /.col -->
                     </div>

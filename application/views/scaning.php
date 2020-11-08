@@ -35,7 +35,7 @@
 }
 </style>
 <div class="row">
-    <div class="col-12 col-md-5 mx-auto">
+    <div class="col-12 col-md-5">
         <?php
         echo $this->session->flashdata('pesan');
         ?>
@@ -65,3 +65,40 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<?= base_url('assets/webcam/'); ?>js/jquery.js"></script>
+<script type="text/javascript" src="<?= base_url('assets/webcam/'); ?>js/qrcodelib.js"></script>
+<script type="text/javascript" src="<?= base_url('assets/webcam/'); ?>js/webcodecamjquery.js"></script>
+<script type="text/javascript">
+var arg = {
+    resultFunction: function(result) {
+        //$('.hasilscan').append($('<input name="noijazah" value=' + result.code + ' readonly><input type="submit" value="Cek"/>'));
+        // $.post("../cek.php", { noijazah: result.code} );
+        var redirect = '<?= base_url('kotak/input_dana') ?>';
+        $.redirectPost(redirect, {
+            kode_kotak: result.code
+        });
+    }
+};
+
+var decoder = $("canvas").WebCodeCamJQuery(arg).data().plugin_WebCodeCamJQuery;
+decoder.buildSelectMenu("select");
+decoder.play();
+/*  Without visible select menu
+    decoder.buildSelectMenu(document.createElement('select'), 'environment|back').init(arg).play();
+*/
+$('select').on('change', function() {
+    decoder.stop().play();
+});
+
+// jquery extend function
+$.extend({
+    redirectPost: function(location, args) {
+        var form = '';
+        $.each(args, function(key, value) {
+            form += '<input type="hidden" name="' + key + '" value="' + value + '">';
+        });
+        $('<form action="' + location + '" method="POST">' + form + '</form>').appendTo('body')
+            .submit();
+    }
+});
+</script>

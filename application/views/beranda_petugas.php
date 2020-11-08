@@ -39,18 +39,10 @@
         <!-- menu  -->
         <div class="row">
             <div class="col-3 mx-auto text-center mt-2">
-                <a href="<?= base_url('mydashboard/scaning_form') ?>">
-                    <img src="<?= base_url('assets/') ?>icon/qr-code.png" width="48">
-                    <div class="font-sm mt-1">
-                        Scanning
-                    </div>
-                </a>
-            </div>
-            <div class="col-3 mx-auto text-center mt-2">
                 <a href="<?= base_url('kotak/manual_form') ?>">
                     <img src="<?= base_url('assets/') ?>icon/data.png" width="48">
                     <div class="font-sm mt-1">
-                        Input Manual
+                        Input Data
                     </div>
                 </a>
             </div>

@@ -1,10 +1,7 @@
 $(function() {
     $("#example1").DataTable({
         "responsive": true,
-        "autoWidth": true,
-        "order": [
-            [1, "desc"]
-        ]
+        "autoWidth": true
     });
     $('#example2').DataTable({
         "paging": true,
