@@ -163,6 +163,7 @@ class Transaksi extends CI_Controller
 
             $transaksi = $this->input->post('transaksi');
             $kategori = $this->input->post('kategori');
+
             $nominal = $this->input->post('nominal');
             $nominal = preg_replace("/[^0-9]/", "", $nominal);
             $uraian = htmlspecialchars($this->input->post('uraian'));
@@ -180,7 +181,35 @@ class Transaksi extends CI_Controller
                         break;
                     case "sumbangan":
                         $post_kode = 4;
-                        $post = 'Terima Sumbangan ' . $uraian;
+                        $post = 'Terima Sumbangan Umum ' . $uraian;
+                        break;
+                    case "majalah":
+                        $post_kode = 10;
+                        $post = 'Penjualan Majalah ' . $uraian;
+                        break;
+                    case "ota khusus":
+                        $post_kode = 11;
+                        $post = 'Ota Khusus ' . $uraian;
+                        break;
+                    case "ota umum":
+                        $post_kode = 12;
+                        $post = 'Ota Umum ' . $uraian;
+                        break;
+                    case "csr":
+                        $post_kode = 13;
+                        $post = 'CSR Perusahaan ' . $uraian;
+                        break;
+                    case "proposal qurban":
+                        $post_kode = 14;
+                        $post = 'Proposal Qurban ' . $uraian;
+                        break;
+                    case "anak yatim":
+                        $post_kode = 15;
+                        $post = 'Anak Yatim ' . $uraian;
+                        break;
+                    case "pembangunan pondok":
+                        $post_kode = 16;
+                        $post = 'Pembangunan Pondok ' . $uraian;
                         break;
                 }
                 $input = [
@@ -215,6 +244,38 @@ class Transaksi extends CI_Controller
                         $post_kode = 9;
                         $post = 'Biaya Lain ' . $uraian;
                         break;
+                    case "yayasan":
+                        $post_kode = 17;
+                        $post = 'Setoran Yayasan ' . $uraian;
+                        break;
+                    case "mukafaah":
+                        $post_kode = 18;
+                        $post = 'Mukafaah IPPQ ' . $uraian;
+                        break;
+                    case "santunan":
+                        $post_kode = 19;
+                        $post = 'Santunan Anak Yatim ' . $uraian;
+                        break;
+                    case "santunan":
+                        $post_kode = 19;
+                        $post = 'Santunan Anak Yatim ' . $uraian;
+                        break;
+                    case "pembayaran ota khusus":
+                        $post_kode = 20;
+                        $post = 'Pembayaran Ota Khusus ' . $uraian;
+                        break;
+                    case "pembayaran ota umum":
+                        $post_kode = 21;
+                        $post = 'Pembayaran Ota Umum ' . $uraian;
+                        break;
+                    case "setoran csr":
+                        $post_kode = 22;
+                        $post = 'Setoran CSR ' . $uraian;
+                        break;
+                    case "pembangunan":
+                        $post_kode = 23;
+                        $post = 'Biaya Pembangunan ' . $uraian;
+                        break;
                 }
                 $input = [
                     'kode_trx' => $trx,
@@ -225,7 +286,10 @@ class Transaksi extends CI_Controller
                     'uraian' => $uraian,
                 ];
             }
-
+            echo '<pre>';
+            print_r($input);
+            echo '<pre>';
+            echo '<ln>';
             $this->crud_m->input_data($input, 'kas');
 
             $this->session->set_flashdata('pesan', '
@@ -274,6 +338,27 @@ class Transaksi extends CI_Controller
                     case "4":
                         $post = 'Terima Sumbangan ' . $uraian;
                         break;
+                    case "10":
+                        $post = 'Penjualan Majalah ' . $uraian;
+                        break;
+                    case "11":
+                        $post = 'Ota Khusus ' . $uraian;
+                        break;
+                    case "12":
+                        $post = 'Ota Umum ' . $uraian;
+                        break;
+                    case "13":
+                        $post = 'CSR Perusahaan ' . $uraian;
+                        break;
+                    case "14":
+                        $post = 'Proposal Qurban ' . $uraian;
+                        break;
+                    case "15":
+                        $post = 'Anak Yatim ' . $uraian;
+                        break;
+                    case "16":
+                        $post = 'Pembangunan Pondok ' . $uraian;
+                        break;
                 }
                 $input = [
                     'kode_trx' => $trx,
@@ -300,6 +385,27 @@ class Transaksi extends CI_Controller
                         break;
                     case "9":
                         $post = 'Biaya Lain ' . $uraian;
+                        break;
+                    case "17":
+                        $post = 'Setoran Yayasan ' . $uraian;
+                        break;
+                    case "18":
+                        $post = 'Mukafaah IPPQ ' . $uraian;
+                        break;
+                    case "19":
+                        $post = 'Santunan Anak Yatim ' . $uraian;
+                        break;
+                    case "20":
+                        $post = 'Pembayaran Ota Khusus ' . $uraian;
+                        break;
+                    case "21":
+                        $post = 'Pembayaran Ota umum ' . $uraian;
+                        break;
+                    case "22":
+                        $post = 'Setoran CSR ' . $uraian;
+                        break;
+                    case "23":
+                        $post = 'Biaya Pembangunan ' . $uraian;
                         break;
                 }
                 $input = [

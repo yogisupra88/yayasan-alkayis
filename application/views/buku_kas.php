@@ -103,8 +103,15 @@
                         <label for="my-select">Katagori Pemasukan</label>
                         <select id="my-select" class="form-control" name="kategori">
                             <option value="infaq">Infaq</option>
+                            <option value="majalah">Penjualan Majalah</option>
+                            <option value="ota khusus">Ota khusus</option>
+                            <option value="ota umum">Ota Umum</option>
+                            <option value="csr">CSR Perusahaan</option>
+                            <option value="proposal qurban">Proposal Qurban</option>
+                            <option value="anak yatim">Anak Yatim</option>
+                            <option value="pembangunan pondok">Pembangunan Pondok</option>
                             <option value="zakat">Zakat</option>
-                            <option value="sumbangan">Sumbangan Donatur</option>
+                            <option value="sumbangan">Sumbangan umum / Lain-lain</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -145,6 +152,13 @@
                     <div class="form-group">
                         <label for="my-select">Katagori Pengeluaran</label>
                         <select id="my-select" class="form-control" name="kategori">
+                            <option value="yayasan">Setoran Yayasan</option>
+                            <option value="mukafaah">Mukafaah IPPQ</option>
+                            <option value="santunan">Santunan Anak Yatim</option>
+                            <option value="pembayaran ota khusus">Pembayaran Ota Khusus</option>
+                            <option value="pembayaran ota umum">Pembayaran Ota umum</option>
+                            <option value="setoran csr">Setoran CSR</option>
+                            <option value="pembangunan">Biaya Pembangunan</option>
                             <option value="operational">Biaya Operational</option>
                             <option value="listrik">Biaya Listrik / Air</option>
                             <option value="pemeliharaan">Biaya Pemeliharaan</option>

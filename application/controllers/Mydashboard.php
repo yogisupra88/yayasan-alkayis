@@ -504,36 +504,8 @@ class Mydashboard extends CI_Controller
             $data['kas'] = $kas;
             $kode_post = $kas->post_kode;
             $data['kode_post'] = $kode_post;
-            switch ($kode_post) {
-                case "1":
-                    $post = 'kotak Amal';
-                    break;
-                case "2":
-                    $post = 'infaq';
-                    break;
-                case "3":
-                    $post = 'Zakat';
-                    break;
-                case "4":
-                    $post = 'Sumbangan';
-                    break;
-                case "5":
-                    $post = 'Biaya Operational';
-                    break;
-                case "6":
-                    $post = 'Biaya Listrik / Air';
-                    break;
-                case "7":
-                    $post = 'Biaya Pemeliharaan';
-                    break;
-                case "8":
-                    $post = 'Beli Peralatan';
-                    break;
-                case "9":
-                    $post = 'Biaya Lain';
-                    break;
-            }
-            $data['post'] = $post;
+            $data_post = $this->crud_m->get_row(['post_kode' => $kode_post], 'post');
+            $data['post'] = $data_post->post_name;
 
             $this->template->load('mainpage', 'edit_kas', $data);
         } else {
