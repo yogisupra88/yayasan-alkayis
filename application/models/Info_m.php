@@ -20,6 +20,12 @@ class Info_m extends CI_Model
         $row1 = $this->db->query($query1)->row_array();
         return $total = $row1['total'];
     }
+    public function t_kotak($tipe)
+    {
+        $query1 = "SELECT COUNT(id_kotak) AS total  FROM kotak WHERE tipe = '$tipe' ";
+        $row1 = $this->db->query($query1)->row_array();
+        return $total = $row1['total'];
+    }
     public function total_petugas()
     {
         $query1 = "SELECT COUNT(id_user) AS total  FROM user WHERE jabatan='Petugas' ";
@@ -82,6 +88,16 @@ class Info_m extends CI_Model
         $row1 = $this->db->query($query1)->row_array();
         return $total = $row1['total'];
     }
+    public function post_kotak_income($kode, $tipe, $fromdate, $enddate)
+    {
+        $date = date("Y-m-d");
+        $query1 = "SELECT SUM(debet) AS total 
+        FROM kas  WHERE post_kode = $kode AND tipe_kotak ='$tipe'
+        AND tanggal >= '$fromdate' AND tanggal<= '$enddate'";
+        $row1 = $this->db->query($query1)->row_array();
+        return $total = $row1['total'];
+    }
+
     public function post_pengeluaran($kode, $fromdate, $enddate)
     {
         $date = date("Y-m-d");
@@ -106,7 +122,6 @@ class Info_m extends CI_Model
         // saldo
         return $result = $debet - $kredit;
     }
-
 }
 
 /* End of file Info_m.php */

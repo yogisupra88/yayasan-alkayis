@@ -41,13 +41,13 @@
     </div>
 
     <div class="col-12">
-        <div class="card-body">
-            <button class="btn btn-info" data-toggle="modal" data-target="#pemasukan" data-toggle="modal"><i
-                    class="fa fa-plus mr-2" aria-hidden="true"> </i> Pemasukan</button>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#pengeluaran" data-toggle="modal">
-                <i class="fa fa-minus mr-2" aria-hidden="true"></i> Pengeluaran</button>
+        <button class="btn btn-info" data-toggle="modal" data-target="#pemasukan" data-toggle="modal"><i
+                class="fa fa-plus mr-2" aria-hidden="true"> </i> Pemasukan</button>
+        <button class="btn btn-danger" data-toggle="modal" data-target="#pengeluaran" data-toggle="modal">
+            <i class="fa fa-minus mr-2" aria-hidden="true"></i> Pengeluaran</button>
 
-            <table id="example2" class="table table-bordered ">
+        <div class="card-body">
+            <table id="example1" class="table table-bordered mt-2">
 
                 <thead>
                     <tr>
@@ -153,7 +153,7 @@
                         <label for="my-select">Katagori Pengeluaran</label>
                         <select id="my-select" class="form-control" name="kategori">
                             <option value="yayasan">Setoran Yayasan</option>
-                            <option value="mukafaah">Mukafaah IPPQ</option>
+                            <option value="mukafaah">Mukafaah PPQ</option>
                             <option value="santunan">Santunan Anak Yatim</option>
                             <option value="pembayaran ota khusus">Pembayaran Ota Khusus</option>
                             <option value="pembayaran ota umum">Pembayaran Ota umum</option>

@@ -53,6 +53,8 @@ class Mydashboard extends CI_Controller
             $data['crumb'] = 'Kotak';
             $data['kotak'] = $this->crud_m->lihat_data('kotak');
             $data['total_kotak'] = $this->info_m->total_kotak();
+            $data['kotak_kaca'] = $this->info_m->t_kotak('Kaca');
+            $data['kotak_kayu'] = $this->info_m->t_kotak('Kayu');
             $this->template->load('mainpage', 'data_kotak', $data);
         } else {
             $this->session->set_flashdata('pesan', '
@@ -241,20 +243,44 @@ class Mydashboard extends CI_Controller
             // filtering data
             // Last Saldo
             $data['saldo_last'] = $this->info_m->saldo_kas_last($from);
-
             // pendapatan
-            $data['kotak_amal'] = $this->info_m->post_income(1, $from, $end);
+            $data['kotak_kaca'] = $this->info_m->post_kotak_income(1, 'Kaca', $from, $end);
+            $data['kotak_kayu'] = $this->info_m->post_kotak_income(1, 'kayu', $from, $end);
             $data['infaq'] = $this->info_m->post_income(2, $from, $end);
             $data['zakat'] = $this->info_m->post_income(3, $from, $end);
             $data['sumbangan'] = $this->info_m->post_income(4, $from, $end);
-            $data['debet'] = $data['saldo_last'] + $data['kotak_amal'] + $data['infaq'] + $data['zakat'] + $data['sumbangan'];
+            $data['majalah'] = $this->info_m->post_income(10, $from, $end);
+            $data['ota_khusus'] = $this->info_m->post_income(11, $from, $end);
+            $data['ota_umum'] = $this->info_m->post_income(12, $from, $end);
+            $data['csr'] = $this->info_m->post_income(13, $from, $end);
+            $data['qurban'] = $this->info_m->post_income(14, $from, $end);
+            $data['anak_yatim'] = $this->info_m->post_income(15, $from, $end);
+            $data['bantuan_pembangunan'] = $this->info_m->post_income(16, $from, $end);
+
+            $data['debet'] = $data['saldo_last'] + $data['kotak_kaca'] + $data['kotak_kayu']
+                + $data['infaq'] + $data['zakat'] + $data['sumbangan']
+                + $data['majalah'] + $data['ota_khusus'] + $data['ota_umum']
+                + $data['csr'] + $data['qurban'] + $data['anak_yatim'] + $data['bantuan_pembangunan'];
+
             // pengeluaran
             $data['operasional'] = $this->info_m->post_pengeluaran(5, $from, $end);
             $data['listrik'] = $this->info_m->post_pengeluaran(6, $from, $end);
             $data['pemeliharaan'] = $this->info_m->post_pengeluaran(7, $from, $end);
             $data['peralatan'] = $this->info_m->post_pengeluaran(8, $from, $end);
             $data['lain'] = $this->info_m->post_pengeluaran(9, $from, $end);
-            $data['kredit'] = $data['operasional'] + $data['listrik'] + $data['pemeliharaan'] + $data['peralatan'] + $data['lain'];
+            $data['setoran_yayasan'] = $this->info_m->post_pengeluaran(17, $from, $end);
+            $data['mukafaah'] = $this->info_m->post_pengeluaran(18, $from, $end);
+            $data['santunan'] = $this->info_m->post_pengeluaran(19, $from, $end);
+            $data['setoran_ota_k'] = $this->info_m->post_pengeluaran(20, $from, $end);
+            $data['setoran_ota_u'] = $this->info_m->post_pengeluaran(21, $from, $end);
+            $data['setoran_csr'] = $this->info_m->post_pengeluaran(22, $from, $end);
+            $data['biaya_bangunan'] = $this->info_m->post_pengeluaran(23, $from, $end);
+
+
+            $data['kredit'] = $data['operasional'] + $data['listrik']
+                + $data['pemeliharaan'] + $data['peralatan'] + $data['lain']
+                + $data['setoran_yayasan'] + $data['mukafaah'] + $data['santunan']
+                + $data['setoran_ota_k'] + $data['setoran_ota_u'] + $data['setoran_csr'] + $data['biaya_bangunan'];
             // saldo Akhir
             $data['saldo_akhir'] = $data['debet'] - $data['kredit'];
             $this->template->load('mainpage', 'laporan', $data);
@@ -294,18 +320,43 @@ class Mydashboard extends CI_Controller
             // Last Saldo
             $data['saldo_last'] = $this->info_m->saldo_kas_last($from);
             // pendapatan
-            $data['kotak_amal'] = $this->info_m->post_income(1, $from, $end);
+            $data['kotak_kaca'] = $this->info_m->post_kotak_income(1, 'Kaca', $from, $end);
+            $data['kotak_kayu'] = $this->info_m->post_kotak_income(1, 'kayu', $from, $end);
             $data['infaq'] = $this->info_m->post_income(2, $from, $end);
             $data['zakat'] = $this->info_m->post_income(3, $from, $end);
             $data['sumbangan'] = $this->info_m->post_income(4, $from, $end);
-            $data['debet'] = $data['saldo_last'] + $data['kotak_amal'] + $data['infaq'] + $data['zakat'] + $data['sumbangan'];
+            $data['majalah'] = $this->info_m->post_income(10, $from, $end);
+            $data['ota_khusus'] = $this->info_m->post_income(11, $from, $end);
+            $data['ota_umum'] = $this->info_m->post_income(12, $from, $end);
+            $data['csr'] = $this->info_m->post_income(13, $from, $end);
+            $data['qurban'] = $this->info_m->post_income(14, $from, $end);
+            $data['anak_yatim'] = $this->info_m->post_income(15, $from, $end);
+            $data['bantuan_pembangunan'] = $this->info_m->post_income(16, $from, $end);
+
+            $data['debet'] = $data['saldo_last'] + $data['kotak_kaca'] + $data['kotak_kayu']
+                + $data['infaq'] + $data['zakat'] + $data['sumbangan']
+                + $data['majalah'] + $data['ota_khusus'] + $data['ota_umum']
+                + $data['csr'] + $data['qurban'] + $data['anak_yatim'] + $data['bantuan_pembangunan'];
+
             // pengeluaran
             $data['operasional'] = $this->info_m->post_pengeluaran(5, $from, $end);
             $data['listrik'] = $this->info_m->post_pengeluaran(6, $from, $end);
             $data['pemeliharaan'] = $this->info_m->post_pengeluaran(7, $from, $end);
             $data['peralatan'] = $this->info_m->post_pengeluaran(8, $from, $end);
             $data['lain'] = $this->info_m->post_pengeluaran(9, $from, $end);
-            $data['kredit'] = $data['operasional'] + $data['listrik'] + $data['pemeliharaan'] + $data['peralatan'] + $data['lain'];
+            $data['setoran_yayasan'] = $this->info_m->post_pengeluaran(17, $from, $end);
+            $data['mukafaah'] = $this->info_m->post_pengeluaran(18, $from, $end);
+            $data['santunan'] = $this->info_m->post_pengeluaran(19, $from, $end);
+            $data['setoran_ota_k'] = $this->info_m->post_pengeluaran(20, $from, $end);
+            $data['setoran_ota_u'] = $this->info_m->post_pengeluaran(21, $from, $end);
+            $data['setoran_csr'] = $this->info_m->post_pengeluaran(22, $from, $end);
+            $data['biaya_bangunan'] = $this->info_m->post_pengeluaran(23, $from, $end);
+
+
+            $data['kredit'] = $data['operasional'] + $data['listrik']
+                + $data['pemeliharaan'] + $data['peralatan'] + $data['lain']
+                + $data['setoran_yayasan'] + $data['mukafaah'] + $data['santunan']
+                + $data['setoran_ota_k'] + $data['setoran_ota_u'] + $data['setoran_csr'] + $data['biaya_bangunan'];
             // saldo Akhir
             $data['saldo_akhir'] = $data['debet'] - $data['kredit'];
             $this->load->view('print_laporan', $data);

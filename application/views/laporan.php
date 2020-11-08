@@ -56,8 +56,13 @@
                         <th class="text-primary">Pendapatan</th>
                     </tr>
                     <tr>
-                        <td>Kotak Amal</td>
-                        <td>Rp.<?= number_format($kotak_amal, 0, ",", "."); ?></td>
+                        <td>Kotak Kaca</td>
+                        <td>Rp.<?= number_format($kotak_kaca, 0, ",", "."); ?></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Kotak Kayu</td>
+                        <td>Rp.<?= number_format($kotak_kayu, 0, ",", "."); ?></td>
                         <td>-</td>
                     </tr>
                     <tr>
@@ -66,17 +71,87 @@
                         <td>-</td>
                     </tr>
                     <tr>
+                        <td>Penjualan Majalah</td>
+                        <td>Rp.<?= number_format($majalah, 0, ",", "."); ?></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Ota Khusus</td>
+                        <td>Rp.<?= number_format($ota_khusus, 0, ",", "."); ?></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Ota Umum</td>
+                        <td>Rp.<?= number_format($ota_umum, 0, ",", "."); ?></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>CSR Perusahaan</td>
+                        <td>Rp.<?= number_format($csr, 0, ",", "."); ?></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Proposal Qurban</td>
+                        <td>Rp.<?= number_format($qurban, 0, ",", "."); ?></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Anak Yatim</td>
+                        <td>Rp.<?= number_format($anak_yatim, 0, ",", "."); ?></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Pembangunan Pondok</td>
+                        <td>Rp.<?= number_format($zakat, 0, ",", "."); ?></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
                         <td>Zakat</td>
                         <td>Rp.<?= number_format($zakat, 0, ",", "."); ?></td>
                         <td>-</td>
                     </tr>
                     <tr>
-                        <td>Sumbangan</td>
+                        <td>Sumbangan Lain</td>
                         <td>Rp.<?= number_format($sumbangan, 0, ",", "."); ?></td>
                         <td>-</td>
                     </tr>
                     <tr>
                         <th class="text-danger">Pengeluaran</th>
+                    </tr>
+                    <tr>
+                        <td>Setoran Yayasan</td>
+                        <td>-</td>
+                        <td class="text-danger">Rp.<?= number_format($setoran_yayasan, 0, ",", "."); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Mukafaah PPQ</td>
+                        <td>-</td>
+                        <td class="text-danger">Rp.<?= number_format($mukafaah, 0, ",", "."); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Santunan Anak Yatim</td>
+                        <td>-</td>
+                        <td class="text-danger">Rp.<?= number_format($santunan, 0, ",", "."); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Setoran Ota Khusus</td>
+                        <td>-</td>
+                        <td class="text-danger">Rp.<?= number_format($setoran_ota_k, 0, ",", "."); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Setoran Ota Umum</td>
+                        <td>-</td>
+                        <td class="text-danger">Rp.<?= number_format($setoran_ota_u, 0, ",", "."); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Setoran CSR</td>
+                        <td>-</td>
+                        <td class="text-danger">Rp.<?= number_format($setoran_csr, 0, ",", "."); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Biaya Pembangunan</td>
+                        <td>-</td>
+                        <td class="text-danger">Rp.<?= number_format($biaya_bangunan, 0, ",", "."); ?></td>
                     </tr>
                     <tr>
                         <td>Biaya Operasional</td>

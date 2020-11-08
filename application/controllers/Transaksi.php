@@ -250,7 +250,7 @@ class Transaksi extends CI_Controller
                         break;
                     case "mukafaah":
                         $post_kode = 18;
-                        $post = 'Mukafaah IPPQ ' . $uraian;
+                        $post = 'Mukafaah PPQ ' . $uraian;
                         break;
                     case "santunan":
                         $post_kode = 19;
@@ -319,7 +319,9 @@ class Transaksi extends CI_Controller
             $id_kas = $this->input->post('id_kas');
             $trx = $this->input->post('trx');
             $transaksi = $this->input->post('transaksi');
+            $tanggal = $this->input->post('tanggal');
             $post_kategori = $this->input->post('kategori');
+            $tanggal = $this->input->post('tanggal');
             $nominal = $this->input->post('nominal');
             $nominal = preg_replace("/[^0-9]/", "", $nominal);
             $uraian = htmlspecialchars($this->input->post('uraian'));
@@ -362,6 +364,7 @@ class Transaksi extends CI_Controller
                 }
                 $input = [
                     'kode_trx' => $trx,
+                    'tanggal' => $tanggal,
                     'post_kode' => $post_kategori,
                     'post' => $post,
                     'debet' => $nominal,
@@ -390,7 +393,7 @@ class Transaksi extends CI_Controller
                         $post = 'Setoran Yayasan ' . $uraian;
                         break;
                     case "18":
-                        $post = 'Mukafaah IPPQ ' . $uraian;
+                        $post = 'Mukafaah PPQ ' . $uraian;
                         break;
                     case "19":
                         $post = 'Santunan Anak Yatim ' . $uraian;
@@ -410,16 +413,13 @@ class Transaksi extends CI_Controller
                 }
                 $input = [
                     'kode_trx' => $trx,
+                    'tanggal' => $tanggal,
                     'post_kode' => $post_kategori,
                     'post' => $post,
                     'kredit' => $nominal,
                     'uraian' => $uraian,
                 ];
             }
-            echo '<pre>';
-            print_r($input);
-            echo '<pre>';
-            echo '<ln>';
             $this->crud_m->update_data(['id' => $id_kas], $input, 'kas');
 
             $this->session->set_flashdata('pesan', '

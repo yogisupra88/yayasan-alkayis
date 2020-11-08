@@ -12,9 +12,21 @@ class Auth extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('auth_m');
     }
-
-
     public function index()
+    {
+
+        if ($this->session->userdata('username')) {
+            if ($this->session->userdata('jabatan') == 'Admin') {
+                redirect('mydashboard/beranda_admin');
+            } elseif ($this->session->userdata('jabatan') == 'Petugas') {
+                redirect('mydashboard/beranda_petugas');
+            }
+        } else {
+            $this->_form();
+        }
+    }
+
+    public function _form()
     {
         $this->form_validation->set_rules('username', 'Username', 'trim|required', [
             'required' => 'Username Harus di isi..!'

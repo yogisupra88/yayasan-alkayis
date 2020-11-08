@@ -45,7 +45,7 @@
                 <select id="my-select" class="form-control" name="kategori">
                     <option value="<?= $kode_post ?>" selected><?= $post; ?> ( Default )</option>
                     <option value="17">Setoran Yayasan</option>
-                    <option value="18">Mukafaah IPPQ</option>
+                    <option value="18">Mukafaah PPQ</option>
                     <option value="19">Santunan Anak Yatim</option>
                     <option value="20">Pembayaran Ota Khusus</option>
                     <option value="21">Pembayaran Ota umum</option>

@@ -1,5 +1,29 @@
 <div class="row">
-    <div class="col-12 col-sm-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="info-box">
+            <span class="info-box-icon bg-success elevation-1"><i class="fa fa-briefcase"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">kotak Kaca</span>
+                <span class="info-box-number">
+                    <?= $kotak_kaca; ?>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+        <div class="info-box">
+            <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-briefcase"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">kotak Kayu</span>
+                <span class="info-box-number">
+                    <?= $kotak_kayu; ?>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
         <div class="info-box">
             <span class="info-box-icon bg-info elevation-1"><i class="fa fa-th-large"></i></span>
 

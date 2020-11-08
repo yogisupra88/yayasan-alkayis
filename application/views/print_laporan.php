@@ -55,11 +55,16 @@
                             </tr>
 
                             <tr>
-                                <th>Pendapatan</th>
+                                <th class="text-primary">Pendapatan</th>
                             </tr>
                             <tr>
-                                <td>Kotak Amal</td>
-                                <td>Rp.<?= number_format($kotak_amal, 0, ",", "."); ?></td>
+                                <td>Kotak Kaca</td>
+                                <td>Rp.<?= number_format($kotak_kaca, 0, ",", "."); ?></td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Kotak Kayu</td>
+                                <td>Rp.<?= number_format($kotak_kayu, 0, ",", "."); ?></td>
                                 <td>-</td>
                             </tr>
                             <tr>
@@ -68,55 +73,122 @@
                                 <td>-</td>
                             </tr>
                             <tr>
+                                <td>Penjualan Majalah</td>
+                                <td>Rp.<?= number_format($majalah, 0, ",", "."); ?></td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Ota Khusus</td>
+                                <td>Rp.<?= number_format($ota_khusus, 0, ",", "."); ?></td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Ota Umum</td>
+                                <td>Rp.<?= number_format($ota_umum, 0, ",", "."); ?></td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>CSR Perusahaan</td>
+                                <td>Rp.<?= number_format($csr, 0, ",", "."); ?></td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Proposal Qurban</td>
+                                <td>Rp.<?= number_format($qurban, 0, ",", "."); ?></td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Anak Yatim</td>
+                                <td>Rp.<?= number_format($anak_yatim, 0, ",", "."); ?></td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Pembangunan Pondok</td>
+                                <td>Rp.<?= number_format($zakat, 0, ",", "."); ?></td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
                                 <td>Zakat</td>
                                 <td>Rp.<?= number_format($zakat, 0, ",", "."); ?></td>
                                 <td>-</td>
                             </tr>
                             <tr>
-                                <td>Sumbangan</td>
+                                <td>Sumbangan Lain</td>
                                 <td>Rp.<?= number_format($sumbangan, 0, ",", "."); ?></td>
                                 <td>-</td>
                             </tr>
                             <tr>
-                                <th>Pengeluaran</th>
+                                <th class="text-danger">Pengeluaran</th>
+                            </tr>
+                            <tr>
+                                <td>Setoran Yayasan</td>
+                                <td>-</td>
+                                <td class="text-danger">Rp.<?= number_format($setoran_yayasan, 0, ",", "."); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Mukafaah PPQ</td>
+                                <td>-</td>
+                                <td class="text-danger">Rp.<?= number_format($mukafaah, 0, ",", "."); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Santunan Anak Yatim</td>
+                                <td>-</td>
+                                <td class="text-danger">Rp.<?= number_format($santunan, 0, ",", "."); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Setoran Ota Khusus</td>
+                                <td>-</td>
+                                <td class="text-danger">Rp.<?= number_format($setoran_ota_k, 0, ",", "."); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Setoran Ota Umum</td>
+                                <td>-</td>
+                                <td class="text-danger">Rp.<?= number_format($setoran_ota_u, 0, ",", "."); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Setoran CSR</td>
+                                <td>-</td>
+                                <td class="text-danger">Rp.<?= number_format($setoran_csr, 0, ",", "."); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Biaya Pembangunan</td>
+                                <td>-</td>
+                                <td class="text-danger">Rp.<?= number_format($biaya_bangunan, 0, ",", "."); ?></td>
                             </tr>
                             <tr>
                                 <td>Biaya Operasional</td>
                                 <td>-</td>
-                                <td>Rp.<?= number_format($operasional, 0, ",", "."); ?></td>
+                                <td class="text-danger">Rp.<?= number_format($operasional, 0, ",", "."); ?></td>
                             </tr>
                             <tr>
                                 <td>Biaya Listrik & Air</td>
                                 <td>-</td>
-                                <td>Rp.<?= number_format($listrik, 0, ",", "."); ?></td>
+                                <td class="text-danger">Rp.<?= number_format($listrik, 0, ",", "."); ?></td>
                             </tr>
                             <tr>
                                 <td>Biaya pemeliharaan</td>
                                 <td>-</td>
-                                <td>Rp.<?= number_format($pemeliharaan, 0, ",", "."); ?></td>
+                                <td class="text-danger">Rp.<?= number_format($pemeliharaan, 0, ",", "."); ?></td>
                             </tr>
                             <tr>
                                 <td>Pembelian Peralatan</td>
                                 <td>-</td>
-                                <td>Rp.<?= number_format($peralatan, 0, ",", "."); ?></td>
+                                <td class="text-danger">Rp.<?= number_format($peralatan, 0, ",", "."); ?></td>
                             </tr>
                             <tr>
                                 <td>Biaya Lain Lain</td>
                                 <td>-</td>
-                                <td>Rp.<?= number_format($lain, 0, ",", "."); ?></td>
+                                <td class=" text-danger">Rp.<?= number_format($lain, 0, ",", "."); ?></td>
                             </tr>
                             <tr style="border: 2px solid black;">
                                 <td>total</td>
                                 <td>Rp.<?= number_format($debet, 0, ",", "."); ?></td>
-                                <td>Rp.<?= number_format($kredit, 0, ",", "."); ?></td>
+                                <td class="text-danger">Rp.<?= number_format($kredit, 0, ",", "."); ?></td>
                             </tr>
-                            <tr style="border: 2px solid black;">
+                            <tr class="bg-light" style="border: 2px solid black;">
                                 <td>Saldo Akhir </td>
                                 <td colspan="2">Rp.<?= number_format($saldo_akhir, 0, ",", "."); ?></td>
                             </tr>
-
-
-
                         </tbody>
                     </table>
                 </div>
