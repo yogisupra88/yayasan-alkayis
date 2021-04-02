@@ -49,11 +49,16 @@ class Auth extends CI_Controller
         $password = htmlspecialchars($this->input->post('password'));
 
         $pass_sha = sha1($password);
-        $where = array('username' => $username);
-        $cekuser = $this->auth_m->cek_user($where, 'user'); // cek data user dari model => table admin
+        $username =  $this->db->escape($username);
+        $pass_sha = $this->db->escape($pass_sha);
+        $cekuser = $this->db->query("SELECT * FROM user WHERE username = $username")->row_array();
+
+        // $where = array('username' => $username);
+        //  $cekuser = $this->auth_m->cek_user($where, 'user'); // cek data user dari model => table admin
         // cek data user admin
         if ($cekuser) {
-            $password_user = $cekuser['pass_sha'];
+            $password_user = "'" . $cekuser['pass_sha'] . "'";
+
             if ($password_user == $pass_sha) {
                 $data = [
                     'username' => $cekuser['username'],

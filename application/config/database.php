@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '5.181.216.108',
-	'username' => 'u1114364_randomia',
-	'password' => 'lEt+@+EGIHuL',
-	'database' => 'u1114364_alkayis',	
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'alkayis_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
