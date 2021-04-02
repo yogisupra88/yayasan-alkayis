@@ -1,12 +1,7 @@
 ###################
-What is CodeIgniter
+What is Yayasan-Alkayis
 ###################
 Aplikasi Manajemen Yayasan Untuk Mengelola Kotak Amal.
-- Akses Petugas
-- Akses Admin
-- Laporan Pendapatan Kotak Amal
-- Laporan Keuangan
-
 *******************
 Codebase Information
 *******************
